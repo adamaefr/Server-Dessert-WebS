@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الشروط والأحكام</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 70px;
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 15, 15, 0.85) 0%,
+        rgba(227, 24, 55, 0.15) 50%,
+        rgba(15, 15, 15, 0.85) 100%
+      );
+      backdrop-filter: blur(2px) contrast(110%);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      z-index: 1000;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .navbar li {
+      margin-left: 30px;
+      position: relative;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0%;
+      height: 3px;
+      background-color: orange;
+      transition: width 0.3s ease;
+      transform-origin: right;
+    }
+
+    .navbar a:hover {
+      color: orange;
+      font-size: 20px;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .title {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 30px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .server-name {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: #ccc;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-overlay"></div>
+
+  <!-- الشريط العلوي -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="رابط_اللوجو" alt="Logo">
+    </div>
+    <ul>
+      <li><a href="index.html">الصفحة الرئيسية</a></li>
+      <li><a href="store.html">المتجر</a></li>
+      <li><a href="terms.html">الشروط والأحكام</a></li>
+      <li><a href="suggestions.html">الاقتراحات</a></li>
+    </ul>
+  </div>
+
+  <!-- العنوان -->
+  <div class="title">الشروط والأحكام</div>
+
+  <!-- مربع الشروط -->
+  <div class="box">
+    <p>
+      • يُمنع استخدام الألفاظ النابية أو العنصرية.<br>
+      • يمنع الغش أو استخدام أدوات خارجية تؤثر على اللعب.<br>
+      • يجب احترام جميع اللاعبين والإداريين داخل السيرفر.<br>
+      • تحتفظ الإدارة بحق تعديل الشروط في أي وقت.<br>
+      • مخالفة الشروط قد تؤدي إلى الحظر المؤقت أو الدائم.
+    </p>
+  </div>
+
+  <!-- اسم السيرفر -->
+  <div class="server-name">Dessert RP</div>
+
+</body>
+</html>

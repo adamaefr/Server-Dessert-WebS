@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>مدينه ديزرت - موقع</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="https://r2.guns.lol/cb5f1c13-d65e-48a3-bd76-15bf7cb3fa19.mov" type="video/mp4" />
+        </video>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" />
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">الصفحه الرئيسيه</a></li>
+            <li><a href="store.html">المتجر</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+            <li><a href="suggestions.html">الاقتراحات</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Dessert RP</h1>
+    </header>
+
+    <main>
+        <section class="features">
+            <h2>مميزات السيرفر</h2>
+            <ul>
+                <li>وظائف متعددة ومتنوعة</li>
+                <li>نظام اقتصادي متكامل</li>
+                <li>سيارات واقعية</li>
+                <li>نظام منازل متطور</li>
+                <li>إدارة نشطة ومتفاعلة</li>
+                <li>حياه واقعيه جديده</li>
+                <li>نظام رقابه متتطور</li>
+                <li>نظام حياه واقعه متميز من نوعه</li>
+                <li>تقديم قطاعات مفتوح 24 ساعه</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>تواصل معنا </p>
+        <a href="https://discord.gg/6Y7BYefS" class="discord-button">Discord</a>
+    </footer>
+
+    <script>
+        const musicBtn = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.innerHTML = '<i class="fas fa-music"></i> تشغيل الموسيقى';
+            } else {
+                bgMusic.play();
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i> إيقاف الموسيقى';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>

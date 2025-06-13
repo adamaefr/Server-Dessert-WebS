@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الاقتراحات</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 70px;
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 15, 15, 0.85) 0%,
+        rgba(227, 24, 55, 0.15) 50%,
+        rgba(15, 15, 15, 0.85) 100%
+      );
+      backdrop-filter: blur(2px) contrast(110%);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      z-index: 1000;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .navbar li {
+      margin-left: 20px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ccc;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .title {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 30px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: 40px auto;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4752c4;
+    }
+
+    .server-name {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: #ccc;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الخلفية -->
+  <div class="background-overlay"></div>
+
+  <!-- الشريط العلوي -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="رابط_اللوجو" alt="Logo">
+    </div>
+    <ul>
+      <li><a href="index.html">الصفحة الرئيسية</a></li>
+      <li><a href="store.html">المتجر</a></li>
+      <li><a href="terms.html">الشروط والأحكام</a></li>
+      <li><a href="suggestions.html">الاقتراحات</a></li>
+    </ul>
+  </div>
+
+  <!-- العنوان المتحرك -->
+  <div class="title">اقتراحات</div>
+
+  <!-- تسجيل الدخول -->
+  <div class="box" id="auth-box">
+    <h3>سجّل دخولك باستخدام Discord</h3>
+    <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=token&scope=identify">
+      <button>تسجيل الدخول</button>
+    </a>
+  </div>
+
+  <!-- نموذج الاقتراح -->
+  <div class="box" id="form-box" style="display: none;">
+    <h3>أرسل اقتراحك</h3>
+    <input type="text" id="username" placeholder="اسمك">
+    <textarea id="suggestion" rows="5" placeholder="اكتب اقتراحك هنا"></textarea>
+    <br>
+    <button onclick="sendSuggestion()">إرسال</button>
+  </div>
+
+  <!-- اسم السيرفر -->
+  <div class="server-name">Dessert RP</div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.hash.substr(1));
+    const accessToken = urlParams.get('access_token');
+
+    if (accessToken) {
+      document.getElementById("auth-box").style.display = "none";
+      document.getElementById("form-box").style.display = "block";
+
+      fetch('https://discord.com/api/users/@me', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      .then(res => res.json())
+      .then(user => {
+        document.getElementById("username").value = user.username + "#" + user.discriminator;
+      });
+    }
+
+    function sendSuggestion() {
+      const username = document.getElementById("username").value;
+      const suggestion = document.getElementById("suggestion").value;
+      const webhookURL = "https://discord.com/api/webhooks/1382920398135627929/YYrrZOXkrJwux_ZgXJjaztUCQ5_p5Xvg1tpRQ8k05ibtPbAxCMX6dIm3C0WbZ3J-H88v";
+
+      if (username && suggestion) {
+        fetch(webhookURL, {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `📬 اقتراح من ${username}:\n\n${suggestion}`
+          })
+        }).then(() => {
+          alert("✅ تم إرسال اقتراحك!");
+          document.getElementById("suggestion").value = "";
+        });
+      } else {
+        alert("❗ يرجى كتابة جميع الحقول.");
+      }
+    }
+  </script>
+
+</body>
+</html>
